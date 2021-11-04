@@ -1,14 +1,17 @@
+import os
 import spotipy
 import csv
 import boto3
 from datetime import datetime
 
+from spotipy.oauth2 import SpotifyClientCredentials
+from dotenv import load_dotenv
+load_dotenv()
+
+spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
+
 from config.playlists import spotify_playlist_1
-## Insert Tools
-
-# spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials())
-
-
+from tools.playlists import get_artists
 
 PLAYLIST = "Rap_Caviar"
 
@@ -24,3 +27,5 @@ def gather_data_local():
         writer = csv.DictWriter(file, fieldnames = header)
         writer.writeheader()
         albums_obtained = []
+
+        artists = get_artists(spotify_playlist_1()[PLAYLIST])
