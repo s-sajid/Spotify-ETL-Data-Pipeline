@@ -47,15 +47,15 @@ def gather_data_local():
 
                         for song in album_data["tracks"]["items"]:
                             album_length_ms = song["duration_ms"] + album_length_ms
-                            
+
                         writer.writerow({"Year Released": album_data["release_date"][:4],
                             "Album Length": album_length_ms,
                             "Album Name": album_data["name"],
                             "Artist": album_data["artists"][0]["name"]})
                     
-                        output_dict["Year Release"].append(album_data["release_date"][:4])
+                        output_dict["Year Released"].append(album_data["release_date"][:4])
                         output_dict["Album Length"].append(album_length_ms)
-                        output_dict["Album_Name"].append(album_data["name"])
+                        output_dict["Album Name"].append(album_data["name"])
                         output_dict["Artist"].append(album_data["artists"][0]["name"])
     
     return output_dict
