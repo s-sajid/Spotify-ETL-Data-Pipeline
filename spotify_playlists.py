@@ -11,8 +11,6 @@ load_dotenv()
 from config.playlists import spotify_playlist_1
 from tools.playlists import get_artists
 
-# spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
-
 client_id = os.getenv("Client_Id")
 client_secret = os.getenv("Client_Secret")
 
@@ -54,7 +52,7 @@ def gather_data_local():
 
         for artist in list(artists.keys()):
             print(artist)
-            artists_albums = spotipy_object.artist_albums(artist, album_type="album", limit = 50)
+            artists_albums = sp.artist_albums(artist, album_type="album", limit = 50)
 
             for album in artists_albums["items"]:
 
@@ -63,7 +61,7 @@ def gather_data_local():
 
                     if key not in albums_obtained:
                         albums_obtained.append(key)
-                        album_data = spotipy_object.album(album["uri"])
+                        album_data = sp.album(album["uri"])
 
                         album_length_ms = 0
 
@@ -80,4 +78,3 @@ def gather_data_local():
                         output_dict["Album Name"].append(album_data["name"])
                         output_dict["Artist"].append(album_data["artists"][0]["name"])
     return output_dict
-
