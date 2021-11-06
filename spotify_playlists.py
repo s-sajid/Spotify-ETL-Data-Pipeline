@@ -8,21 +8,23 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 load_dotenv()
 
-spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
-
 from config.playlists import spotify_playlist_1
 from tools.playlists import get_artists
 
-PLAYLIST = "Rap_Caviar"
+spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
+
+PLAYLIST = "rap_caviar"
 
 def gather_data_local():
+    
     output_dict = {
-    "Year_Released" : [],
-    "Album_Length" : [],
-    "Album_Name" : [],
-    "Artist" : []
-}
-    with open("Rap_Caviar_Albums.csv", "w") as file:
+    "Year_Released": [],
+    "Album_Length": [],
+    "Album_Name": [],
+    "Artist": []
+    }
+
+    with open("rapcaviar_albums.csv", "w") as file:
         header = list( output_dict.keys())
         writer = csv.DictWriter(file, fieldnames = header)
         writer.writeheader()
@@ -57,5 +59,5 @@ def gather_data_local():
                         output_dict["Album Length"].append(album_length_ms)
                         output_dict["Album Name"].append(album_data["name"])
                         output_dict["Artist"].append(album_data["artists"][0]["name"])
-    
     return output_dict
+
