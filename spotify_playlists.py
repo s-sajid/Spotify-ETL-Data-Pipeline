@@ -11,7 +11,27 @@ load_dotenv()
 from config.playlists import spotify_playlist_1
 from tools.playlists import get_artists
 
-spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
+# spotipy_object = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
+
+client_id = os.getenv("Client_Id")
+client_secret = os.getenv("Client_Secret")
+
+client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+def getTrackIDs(user, playlist_id):
+    ids = []
+    playlist = sp.user_playlist(user, playlist_id)
+    for item in playlist['tracks']['items']:
+        track = item['track']
+        ids.append(track['id'])
+    return ids
+
+ids = getTrackIDs("uhdtt9x914rmzvcfxogs72q93", "71sU6agJ13FCerhUW6tlll")
+
+print(len(ids))
+print(ids)
+
 
 PLAYLIST = "rap_caviar"
 
