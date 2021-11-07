@@ -24,7 +24,11 @@ def gather_data_local():
         "Album Name": [],
         "Artist": []
     }
-    with open("rapcaviar_albums.csv", "w") as file:
+
+    file_name = "rapcaviar_albums.csv"
+    abs_file_path = os.path.join(os.getenv("data_directory"), file_name)
+
+    with open(abs_file_path, "w") as file:
         header = list(output_dict.keys())
         writer = csv.DictWriter(file, fieldnames=header)
         writer.writeheader()
@@ -60,3 +64,36 @@ def gather_data_local():
     return output_dict
 
 gather_data_local()
+
+def gather_data():
+
+    with open("/temp/rapcaviar_albums.csv", "w") as file:
+        header = ["Year Released", "Album Length", "Album Name", "Artist"]
+        writer = csv.DictWriter(file, fieldnames = header)
+        writer.writeheader()
+        artists = get_artists(spotify_playlist_1()[PLAYLIST])
+
+        for artist in artists.keys():
+            artists_albums = spotify.artust_albums(artist, album_type = "album", limit = 50)
+
+            for album in artists_albums["items"]:
+                if "US" in artists_albums["items"][0]["available_markets"]:
+                    album_data = spotify.album(album["uri"])
+
+                    album_length_ms = 0
+
+                    for song in album_data["tracks"]["items"]:
+                        album_length_ms = song["duration_ms"] + album_length_ms
+
+                    writer.writerow({"Year Released": album_data["release_date"][:4],
+                                    "Album Length": album_length_ms,
+                                    "Album Name": album_data["name"],
+                                    "Artist": album_data["artists"][0]["name"]})
+
+    s3_res =boto3.resource("s3")
+    date = datetime.now()
+    filename = f"{date.year}/{date.month}/{date.day}/rapcaviar_albums.csv"
+    
+    response = s3_res.Object("spotify_analysis_data", filename).upload_file("/temp/rapcavier_albums.csv")
+
+    return response
