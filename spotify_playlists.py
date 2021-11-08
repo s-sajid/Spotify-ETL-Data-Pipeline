@@ -4,7 +4,6 @@ import csv
 import boto3
 from datetime import datetime
 
-from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 load_dotenv()
 
