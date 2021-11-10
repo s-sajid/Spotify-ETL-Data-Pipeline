@@ -13,6 +13,9 @@ from tools.playlists import get_artists
 spotify = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
 
 
+file_name = "rapcaviar_albums.csv"
+abs_file_path = os.path.join(os.getenv("data_directory"), file_name)
+
 PLAYLIST = "Rap_Caviar"
 
 def gather_data_local():
@@ -24,8 +27,6 @@ def gather_data_local():
         "Artist": []
     }
 
-    file_name = "rapcaviar_albums.csv"
-    abs_file_path = os.path.join(os.getenv("data_directory"), file_name)
 
     with open(abs_file_path, "w") as file:
         header = list(output_dict.keys())
@@ -66,14 +67,14 @@ gather_data_local()
 
 def gather_data():
 
-    with open("/temp/rapcaviar_albums.csv", "w") as file:
+    with open(abs_file_path, "w") as file:
         header = ["Year Released", "Album Length", "Album Name", "Artist"]
         writer = csv.DictWriter(file, fieldnames = header)
         writer.writeheader()
         artists = get_artists(spotify_playlist_1()[PLAYLIST])
 
         for artist in artists.keys():
-            artists_albums = spotify.artust_albums(artist, album_type = "album", limit = 50)
+            artists_albums = spotify.artist_albums(artist, album_type = "album", limit = 50)
 
             for album in artists_albums["items"]:
                 if "US" in artists_albums["items"][0]["available_markets"]:
@@ -93,6 +94,12 @@ def gather_data():
     date = datetime.now()
     filename = f"{date.year}/{date.month}/{date.day}/rapcaviar_albums.csv"
     
-    response = s3_res.Object("spotify_analysis_data", filename).upload_file("/temp/rapcavier_albums.csv")
+    response = s3_res.Object("spotify_analysis_data", filename).upload_file(abs_file_path)
 
     return response
+
+def lambda_handler(event, context):
+    gather_data()
+
+# if __name__ == "__main__":
+#     data = gather_data()
