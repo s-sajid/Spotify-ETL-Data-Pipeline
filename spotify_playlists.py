@@ -12,7 +12,6 @@ from tools.playlists import get_artists
 
 spotify = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
 
-
 file_name = "rapcaviar_albums.csv"
 abs_file_path = os.path.join(os.getenv("data_directory"), file_name)
 
@@ -26,7 +25,6 @@ def gather_data_local():
         "Album Name": [],
         "Artist": []
     }
-
 
     with open(abs_file_path, "w") as file:
         header = list(output_dict.keys())
@@ -62,8 +60,6 @@ def gather_data_local():
                         output_dict["Artist"].append(album_data["artists"][0]["name"])
 
     return output_dict
-
-gather_data_local()
 
 def gather_data():
 
@@ -101,5 +97,5 @@ def gather_data():
 def lambda_handler(event, context):
     gather_data()
 
-# if __name__ == "__main__":
-#     data = gather_data()
+if __name__ == "__main__":
+    data = gather_data_local()
