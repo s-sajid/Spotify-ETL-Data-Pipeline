@@ -15,5 +15,6 @@ variable "TF_VAR_SECRET_KEY" {
 }
 
 variable "region" {
-    type = "us-west-1"
+    type = string
+    default = "us-west-1"
 }
