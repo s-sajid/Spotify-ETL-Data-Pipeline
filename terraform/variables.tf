@@ -13,3 +13,7 @@ variable "TF_VAR_ACCESS_KEY" {
 variable "TF_VAR_SECRET_KEY" {
     type = "string"
 }
+
+variable "region" {
+    type = "us-west-1"
+}
