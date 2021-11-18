@@ -1,17 +1,21 @@
-variable "TF_VAR_SPOTIPY_CLIENT_ID" {
+variable "Spotify_Client_ID" {
     type = "string"
+    sensitive = true
 }
 
-variable "TF_VAR_SPOTIPY_CLIENT_SECRET" {
+variable "Spotify_Client_Secret" {
     type = "string"
+    sensitive = true
 }
 
-variable "TF_VAR_ACCESS_KEY" {
+variable "AWS_Access_Key" {
     type = "string"
+    sensitive = true
 }
 
-variable "TF_VAR_SECRET_KEY" {
+variable "AWS_Secret_Key" {
     type = "string"
+    sensitive = true
 }
 
 variable "region" {
