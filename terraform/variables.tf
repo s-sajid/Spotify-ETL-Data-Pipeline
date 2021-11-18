@@ -20,5 +20,5 @@ variable "AWS_Secret_Key" {
 
 variable "region" {
     type = string
-    default = "us-west-1"
+    default = "us-west-2"
 }
