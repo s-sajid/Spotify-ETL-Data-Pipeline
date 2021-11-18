@@ -11,8 +11,8 @@ resources "aws_lambda_function" "spotify_data_analysis" {
 
     environment {
         variables = {
-            Client_Id = var.Spotify_Client_ID,
-            Cleint_Secret = var.Spotify_Client_Secret
+            Spotify_Client_Id = var.Spotify_Client_ID,
+            Spotify_Client_Secret = var.Spotify_Client_Secret
         }
     }
 }
