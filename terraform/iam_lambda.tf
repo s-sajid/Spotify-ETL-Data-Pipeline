@@ -22,3 +22,20 @@ resource "aws_iam_policy" "lambda_execution_policy" {
   name = "lambda_execution_policy"
   policy = data.aws_iam_policy_document.lambda_execution_policy_document.json
 }
+
+data "aws_iam_policy_document" "lambda_execution_policy_document" {
+    statement {
+        sid = "ManageLambdaFunction"
+        effect = "Allow"
+
+        actions = [
+            "lambda:*",
+            "ec2:*",
+            "cloudwatch:*",
+            "logs:*",
+            "s3:*"
+        ]
+
+        resources = ["*"]
+    }
+}
