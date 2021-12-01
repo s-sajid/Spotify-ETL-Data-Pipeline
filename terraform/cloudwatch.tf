@@ -7,6 +7,6 @@ resource "aws_cloudwatch_event_rule" "weekly" {
 
 resource "aws_cloudwatch_event_target" "trigger_cmo_strategy" {
   rule = "${aws_cloudwatch_event_rule.weekly.name}"
-  target_id = "spotify_playlists"
-  arn = "${aws_lambda_function.spotify_playlists.arn}"
+  target_id = "spotify_analysis"
+  arn = "${aws_lambda_function.spotify_analysis.arn}"
 }
