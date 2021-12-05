@@ -1,11 +1,11 @@
 # terraform init
 
-cp -r /Users/sdsaj/Anaconda3/Lib/site-packages/spotipy ../lambda_payloads/playlist_payload/
-cp -r /Users/sdsaj/Anaconda3/Lib/site-packages/requests ../lambda_payloads/playlist_payload/
+cp -r C:/Users/sdsaj/Anaconda3/Lib/site-packages/spotipy ../lambda_payloads/playlist_payload/spotipy
+cp -r C:/Users/sdsaj/Anaconda3/Lib/site-packages/requests ../lambda_payloads/playlist_payload/
 
-cp /Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/spotify_playlists.py ../lambda_payloads/playlist_payload/
-cp /Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/config/playlists.py ../lambda_payloads/playlist_payload/config
-cp /Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/tools/playlists.py ../lambda_payloads/playlist_payload/tools
+cp C:/Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/spotify_playlists.py ../lambda_payloads/playlist_payload/
+cp C:/Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/config/* ../lambda_payloads/playlist_payload/config
+cp C:/Users/sdsaj/Desktop/Python/Spotify_Data_Pipeline/tools/* ../lambda_payloads/playlist_payload/tools
 
 # terraform validate
 
