@@ -1,19 +1,14 @@
-import os
 import spotipy
 import csv
 import boto3
 from datetime import datetime
 
-from dotenv import load_dotenv
-load_dotenv()
-
 from config.playlists import spotify_playlist_1
 from tools.playlists import get_artists
 
-spotify = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials(os.getenv("Client_Id"), os.getenv("Client_Secret")))
+spotify = spotipy.Spotify(client_credentials_manager = spotipy.oauth2.SpotifyClientCredentials())
 
 file_name = "rapcaviar_albums.csv"
-abs_file_path = os.path.join(os.getenv("data_directory"), file_name)
 
 PLAYLIST = "Rap_Caviar"
 
@@ -26,7 +21,7 @@ def gather_data_local():
         "Artist": []
     }
 
-    with open(abs_file_path, "w") as file:
+    with open(f"data/{str(file_name)}", "w") as file:
         header = list(output_dict.keys())
         writer = csv.DictWriter(file, fieldnames=header)
         writer.writeheader()
@@ -50,6 +45,7 @@ def gather_data_local():
 
                         for song in album_data["tracks"]["items"]:
                             album_length_ms = song["duration_ms"] + album_length_ms
+                            
                         writer.writerow({"Year Released": album_data["release_date"][:4],
                                          "Album Length": album_length_ms,
                                          "Album Name": album_data["name"],
@@ -63,7 +59,7 @@ def gather_data_local():
 
 def gather_data():
 
-    with open(abs_file_path, "w") as file:
+    with open(f"data/{str(file_name)}", "w") as file:
         header = ["Year Released", "Album Length", "Album Name", "Artist"]
         writer = csv.DictWriter(file, fieldnames = header)
         writer.writeheader()
@@ -86,11 +82,11 @@ def gather_data():
                                     "Album Name": album_data["name"],
                                     "Artist": album_data["artists"][0]["name"]})
 
-    s3_res =boto3.resource("s3")
+    s3 =boto3.resource("s3")
     date = datetime.now()
-    filename = f"{date.year}/{date.month}/{date.day}/rapcaviar_albums.csv"
+    filename = f"{date.year}/{date.month}/{date.day}/{str(file_name)}"
     
-    response = s3_res.Object("spotify_analysis_data", filename).upload_file(abs_file_path)
+    response = s3.Object("spotify_analysis_data", filename).upload_file(f"data/{str(file_name)}")
 
     return response
 
