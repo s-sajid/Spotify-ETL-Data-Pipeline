@@ -10,10 +10,10 @@ client = boto3.client("s3",
     aws_secret_access_key = os.getenv("AWS_Secret_Key"))
 
 date = datetime.now()
-filename = f"{date.year}/{date.month}/{date.day}/rapcaviar_albums.csv"
 
 for file in os.listdir():
     if ".csv" in file:
+        filename = f"{date.year}/{date.month}/{date.day}/{str(file)}"
         upload_file_bucket = "s3-uploader-bucket-1"
         upload_file_key = str(filename)
         client.upload_file(file, upload_file_bucket, upload_file_key)
