@@ -88,7 +88,7 @@ def gather_data():
 
     s3 =boto3.resource("s3")
     date = datetime.now()
-    filename = f"{date.year}/{date.month}/{date.day}/rapcaviar_albums.csv"
+    filename = f"{date.year}/{date.month}/{date.day}/{str(file_name)}"
 
     response = s3.Object("spotify_analysis_data", filename).upload_file(f"data/{str(file_name)}")
 
