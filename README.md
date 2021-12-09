@@ -14,7 +14,7 @@
 
 ## Intoduction <a name="Introduction"></a>
 
-This is a tool that gathers data from selected Spotify plalists and uploads it to a data lake in AWS S3 for analysis.
+This is a tool that gathers data from selected Spotify playlists and uploads it to a data lake in AWS S3 for analysis.
 
 ---
 
@@ -29,7 +29,7 @@ The technology that was used for this includes :
 * [Spotipy](https://spotipy.readthedocs.io/)
   * Used to Access the Spotify API
 * [Terraform](https://www.terraform.io/)
-  * Used to Create the Infrastructure as Code
+  * Used to Deploy AWS Infrastructure as Code
 
 ---
 
@@ -39,9 +39,9 @@ The technology that was used for this includes :
 
 The terraform scripts are used to:
 
-* Create a Lambda function
-* Set IAM policies/Roles
 * Create a CloudWatch alarm
+* Create a Lambda function
+* Set IAM policies/roles
   
 ---
 
