@@ -35,7 +35,7 @@ The technology that was used for this includes :
 
 ## Architecture <a name="Architecture"></a>
 
-![Architecture Diagram](/Images/Architecture_Diagram.PNG)
+![Architecture Diagram](/images/Architecture_Diagram.PNG)
 
 The terraform scripts are used to:
 
