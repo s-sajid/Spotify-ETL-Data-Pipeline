@@ -8,7 +8,7 @@
 2. [Technology](#Tech)
 3. [Architecture](#Architecture)
 4. [Improvements](#Improvements)
-5. [Refrences](#Refrences)
+5. [References](#References)
 
 ---
 
@@ -20,7 +20,7 @@ This is a tool that gathers data from selected Spotify playlists and uploads it 
 
 ## Technology <a name="Tech"></a>
 
-The technology that was used for this includes :
+The technologies used for this project include :
 
 * [Amazon Web Services (AWS)](https://aws.amazon.com/)
   * Used to Create the Data Pipeline
@@ -55,7 +55,7 @@ The terraform scripts are used to:
 
 ---
 
-## Refrences <a name="Refrences"></a>
+## References <a name="References"></a>
 
 * [Youtube Project Reference Link](https://www.youtube.com/watch?v=iYpoKQZP3EU)
 * [Youtube Terraform Reference Link](https://www.youtube.com/watch?v=vwn77cUarTs&list=PL8HowI-L-3_9bkocmR3JahQ4Y-Pbqs2Nt)
